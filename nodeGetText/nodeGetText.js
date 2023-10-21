@@ -6,6 +6,40 @@ const pdfFilePath = './origin_text.pdf';
 const tagFilePath = './contentTag.pdf';
 const finalDataPath = './finalData.txt';
 
+const smallTypeTags = [
+  { name: '无所执', weight: 84, id: 0, isSelect: false },
+  { name: '随缘而应', weight: 59, id: 1, isSelect: false },
+  { name: '本心', weight: 55, id: 2, isSelect: false },
+  { name: '无所住', weight: 53, id: 3, isSelect: false },
+  { name: '修行', weight: 53, id: 4, isSelect: false },
+  { name: '因果', weight: 39, id: 5, isSelect: false },
+  { name: '无所求', weight: 37, id: 6, isSelect: false },
+  { name: '自性', weight: 36, id: 7, isSelect: false },
+  { name: '执念', weight: 33, id: 8, isSelect: false },
+  { name: '着相', weight: 33, id: 9, isSelect: false },
+  { name: '慈悲', weight: 32, id: 10, isSelect: false },
+  { name: '观自在', weight: 30, id: 11, isSelect: false },
+  { name: '念起念落', weight: 28, id: 12, isSelect: false },
+  { name: '事上磨', weight: 27, id: 13, isSelect: false },
+  { name: '助缘', weight: 25, id: 14, isSelect: false },
+  { name: '自观自渡', weight: 22, id: 15, isSelect: false },
+  { name: '见闻觉知', weight: 21, id: 16, isSelect: false },
+  { name: '善恶', weight: 19, id: 17, isSelect: false },
+  { name: '无定义', weight: 14, id: 18, isSelect: false },
+  { name: '无分别', weight: 12, id: 19, isSelect: false },
+  { name: '诚其意', weight: 12, id: 20, isSelect: false },
+  { name: '发心', weight: 11, id: 21, isSelect: false },
+  { name: '无为', weight: 10, id: 22, isSelect: false },
+  { name: '致中和', weight: 10, id: 23, isSelect: false },
+  { name: '真相', weight: 10, id: 24, isSelect: false },
+  { name: '致良知', weight: 8, id: 25, isSelect: false },
+  { name: '无我', weight: 7, id: 26, isSelect: false },
+  { name: '生命意义', weight: 6, id: 27, isSelect: false },
+  { name: '戒定慧', weight: 6, id: 28, isSelect: false },
+  { name: '中医', weight: 6, id: 29, isSelect: false },
+  { name: '无常', weight: 4, id: 30, isSelect: false }
+];
+
 function getPdfFileText(filePath) {
   // 使用pdf-parse库解析PDF文件
   fs.readFile(filePath, (err, data) => {
@@ -22,7 +56,7 @@ function getPdfFileText(filePath) {
       // 使用正则表达式去除空行
       pdfText = pdfText.replace(/^\s*\n/gm, '');
 
-      // 使用正则表达式去除数字加换行格式的字符
+      // 使用正则表达式去除数字加换行格式的字符（去掉pdf中的页数信息）
       pdfText = pdfText.replace(/\d+\n/g, ''); // 匹配数字加换行并替换为空字符串
 
       // 加个特殊字符方便划分
@@ -66,7 +100,8 @@ function getTagPdfText(contentArr) {
       dataList.shift();
       // console.log('dataList:', dataList)
 
-      const subTagArr = dealTagOriginData(dataList);
+      // const subTagArr = dealTagOriginData(dataList);
+      const subTagArr = smallTypeTags;
 
       // 各条问答内容对应的标签id
       const dataTagObj = makeTagId(dataList, subTagArr);
@@ -79,7 +114,7 @@ function getTagPdfText(contentArr) {
   });
 }
 
-// 处理各个标签获得每个标签出现的次数
+// 处理各个标签获得每个标签出现的次数并生成子标签数组
 function dealTagOriginData(dataList) {
   // 截取“（”字符前的部分
   const newDataList = dataList.map(val => {
