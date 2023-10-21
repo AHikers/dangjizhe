@@ -162,7 +162,7 @@ function dealTagOriginData(dataList) {
   return newTagArr;
 }
 
-// subTagArr包含各个标签id、name等信息的对象数组
+// subTagArr包含各个子标签id、name等信息的对象数组
 // dataList是各条内容所对应的标签组成的数组
 function makeTagId(dataList, subTagArr) {
   const bigTypeList = [
