@@ -4,7 +4,8 @@ const pdf = require('pdf-parse');
 // 读取PDF文件的路径
 const pdfFilePath = './origin_text.pdf';
 const tagFilePath = './contentTag.pdf';
-const finalDataPath = './finalData.txt';
+// const finalDataPath = './finalData.txt';
+const finalDataPath = './finalData1.txt';
 
 const smallTypeTags = [
   { name: '无所执', weight: 84, id: 0, isSelect: false },
@@ -202,7 +203,7 @@ function makeTagId(dataList, subTagArr) {
 function generateObjDataByContent(contentArr, dataTagObj) {
   const objData = contentArr.map((val, index) => {
     return {
-      id: index + 1,
+      id: index + 501,
       content: val,
       mainTagId: dataTagObj[index].mainTagId,
       subTagIds: dataTagObj[index].subTagIds,

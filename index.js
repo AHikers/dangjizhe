@@ -247,6 +247,7 @@ async function bootstrap() {
 async function readFileGetContent() {
   // 读取文件的路径
   const filePath = './nodeGetText/finalData.txt';
+  const filePath1 = './nodeGetText/finalData1.txt';
 
   const result = await new Promise((resolve, reject) => {
     // 使用 fs.readFile 方法异步读取文件内容
@@ -262,8 +263,22 @@ async function readFileGetContent() {
       resolve(JSON.parse(data))
     });
   })
+  const result1 = await new Promise((resolve, reject) => {
+    // 使用 fs.readFile 方法异步读取文件内容
+    fs.readFile(filePath1, 'utf8', (err, data) => {
+      if (err) {
+        console.error('读取文件出错:', err);
+        reject(err)
+        return;
+      }
 
-  return result;
+      // 输出文件内容
+      // console.log('文件内容:', JSON.parse(data));
+      resolve(JSON.parse(data))
+    });
+  })
+
+  return result.concat(result1);
 }
 
 function filterDataWithParams(mainTagId, subTagIds, page) {
@@ -330,5 +345,6 @@ bootstrap();
 //   // const finalContentList = filterDataWithParams(-1, [], 1)
 //   const finalContentList = searchContentByData('执着')
 //   console.log(adjustContentData(finalContentList))
+//   console.log('length:', fileContentList.length)
 // }
 // testData()
