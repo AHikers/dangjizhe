@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 // const { init: initDB, Counter } = require("./db");
+const schedule = require('node-schedule');
 
 const Tesseract = require('tesseract.js');
 
@@ -336,7 +337,14 @@ function adjustContentData(data) {
 
 // workerFunc()
 
+// 启动服务
 bootstrap();
+
+// 定时任务-每天0点执行一次----用于获取最新数据
+const job = schedule.scheduleJob('0 0 * * *', function () {
+  fileContentList = readFileGetContent();
+  console.log('定时任务每天 0 点执行中...');
+});
 
 // async function testData() {
 //   if (!fileContentList || !fileContentList.length) {
