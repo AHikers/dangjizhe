@@ -340,9 +340,16 @@ function adjustContentData(data) {
 // 启动服务
 bootstrap();
 
+// 测试数据
+// async function testData() {
+//   fileContentList = await readFileGetContent();
+//   console.log('fileContentList:', fileContentList)
+// }
+// testData()
+
 // 定时任务-每天0点执行一次----用于获取最新数据
-const job = schedule.scheduleJob('0 0 * * *', function () {
-  fileContentList = readFileGetContent();
+const job = schedule.scheduleJob('0 0 * * *', async function () {
+  fileContentList = await readFileGetContent();
   console.log('定时任务每天 0 点执行中...');
 });
 
