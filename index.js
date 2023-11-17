@@ -183,6 +183,7 @@ app.post("/api/scopeSearchContent", async (req, res) => {
   const end = (dataLength - endNum) - 1
   console.log('start:', start, 'end:', end, 'length:', dataLength)
   const finalContentList = fileContentList.slice(start, end);
+  console.log('finalContentList:', finalContentList)
   const deepCopyContentList = finalContentList.map(item => {
     return {
       ...item,
