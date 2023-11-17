@@ -178,7 +178,7 @@ app.post("/api/scopeSearchContent", async (req, res) => {
   if (!fileContentList || !fileContentList.length) {
     fileContentList = await readFileGetContent()
   }
-  const dataLength = fileContentList.length
+  const dataLength = Number(fileContentList.length)
   const start = (dataLength - startNum) - 1
   const end = (dataLength - endNum) - 1
   const finalContentList = fileContentList.slice(start, end);
