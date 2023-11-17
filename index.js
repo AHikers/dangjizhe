@@ -279,7 +279,7 @@ async function readFileGetContent() {
     });
   })
 
-  return result.concat(result1);
+  return result1.concat(result)
 }
 
 function filterDataWithParams(mainTagId, subTagIds, page) {
@@ -306,7 +306,7 @@ function filterDataWithParams(mainTagId, subTagIds, page) {
     return obj.mainTagId === mainTagId && subTagFlag;
   })
   const start = (page - 1) * offset;
-  const end = start + 15;
+  const end = start + offset;
   const pageContentList = newContentList.slice(start, end);
   return pageContentList;
 }
@@ -343,7 +343,17 @@ bootstrap();
 // 测试数据
 // async function testData() {
 //   fileContentList = await readFileGetContent();
-//   console.log('fileContentList:', fileContentList)
+//   // console.log('fileContentList:', fileContentList.length)
+//   const finalContentList = filterDataWithParams(-1, [], 1)
+//   // console.log('finalContentList:', finalContentList)
+//   const deepCopyContentList = finalContentList.map(item => {
+//     return {
+//       ...item,
+//     }
+//   })
+//   // console.log('deepCopyContentList:', deepCopyContentList)
+//   const testList = adjustContentData(deepCopyContentList)
+//   console.log('fileContentList:', testList)
 // }
 // testData()
 
