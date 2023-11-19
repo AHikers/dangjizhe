@@ -178,7 +178,14 @@ app.post("/api/getMarkContent", async (req, res) => {
   if (!fileContentList || !fileContentList.length) {
     fileContentList = await readFileGetContent()
   }
-  const finalContentList = fileContentList.filter(item => markIdList.includes(item.id));
+  // const finalContentList = fileContentList.filter(item => markIdList.includes(item.id));
+  const finalContentList = [];
+  markIdList.forEach(val => {
+    const one = fileContentList.find(item => item.id == val)
+    if (one) {
+      finalContentList.unshift(one)
+    }
+  })
   const deepCopyContentList = finalContentList.map(item => {
     return {
       ...item,
