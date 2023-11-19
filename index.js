@@ -171,6 +171,40 @@ app.post("/api/getContent", async (req, res) => {
 });
 
 
+// 范围收藏数据接口
+app.post("/api/getMarkContent", async (req, res) => {
+  const { markIdList } = req.body;
+  // 真实数据
+  if (!fileContentList || !fileContentList.length) {
+    fileContentList = await readFileGetContent()
+  }
+  const finalContentList = fileContentList.filter(item => markIdList.includes(item.id));
+  const deepCopyContentList = finalContentList.map(item => {
+    return {
+      ...item,
+    }
+  })
+
+  // 运用在正式环境
+  res.send({
+    code: 0,
+    data: {
+      type: 0,
+      content: adjustContentData(deepCopyContentList),
+    },
+  });
+
+  // 审核时用的代码
+  // res.send({
+  //   code: 0,
+  //   data: {
+  //     type: 1,
+  //     content: testContentList,
+  //   },
+  // });
+
+});
+
 // 范围搜索接口
 app.post("/api/scopeSearchContent", async (req, res) => {
   const { startNum, endNum } = req.body;
@@ -179,7 +213,7 @@ app.post("/api/scopeSearchContent", async (req, res) => {
     fileContentList = await readFileGetContent()
   }
   const newList = [...fileContentList]
-  const finalContentList = newList.reverse().slice(startNum - 1, endNum - 1);
+  const finalContentList = newList.reverse().slice(startNum - 1, endNum);
   const deepCopyContentList = finalContentList.map(item => {
     return {
       ...item,
