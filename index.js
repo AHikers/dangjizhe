@@ -151,27 +151,27 @@ app.post("/api/getContent", async (req, res) => {
   })
 
   // 运用在正式环境
-  res.send({
-    code: 0,
-    data: {
-      type: 0,
-      content: adjustContentData(deepCopyContentList),
-    },
-  });
-
-  // 审核时用的代码
   // res.send({
   //   code: 0,
   //   data: {
-  //     type: 1,
-  //     content: testContentList,
+  //     type: 0,
+  //     content: adjustContentData(deepCopyContentList),
   //   },
   // });
+
+  // 审核时用的代码
+  res.send({
+    code: 0,
+    data: {
+      type: 1,
+      content: testContentList,
+    },
+  });
 
 });
 
 
-// 范围收藏数据接口
+// 收藏数据接口
 app.post("/api/getMarkContent", async (req, res) => {
   const { markIdList } = req.body;
   // 真实数据
@@ -193,22 +193,22 @@ app.post("/api/getMarkContent", async (req, res) => {
   })
 
   // 运用在正式环境
-  res.send({
-    code: 0,
-    data: {
-      type: 0,
-      content: adjustContentData(deepCopyContentList),
-    },
-  });
-
-  // 审核时用的代码
   // res.send({
   //   code: 0,
   //   data: {
-  //     type: 1,
-  //     content: testContentList,
+  //     type: 0,
+  //     content: adjustContentData(deepCopyContentList),
   //   },
   // });
+
+  // 审核时用的代码
+  res.send({
+    code: 0,
+    data: {
+      type: 1,
+      content: testContentList,
+    },
+  });
 
 });
 
@@ -228,22 +228,22 @@ app.post("/api/scopeSearchContent", async (req, res) => {
   })
 
   // 运用在正式环境
-  res.send({
-    code: 0,
-    data: {
-      type: 0,
-      content: adjustContentData(deepCopyContentList),
-    },
-  });
-
-  // 审核时用的代码
   // res.send({
   //   code: 0,
   //   data: {
-  //     type: 1,
-  //     content: testContentList,
+  //     type: 0,
+  //     content: adjustContentData(deepCopyContentList),
   //   },
   // });
+
+  // 审核时用的代码
+  res.send({
+    code: 0,
+    data: {
+      type: 1,
+      content: testContentList,
+    },
+  });
 
 });
 
