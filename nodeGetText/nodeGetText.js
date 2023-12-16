@@ -61,7 +61,7 @@ function getPdfFileText(filePath) {
       pdfText = pdfText.replace(/\d+\n/g, ''); // 匹配数字加换行并替换为空字符串
 
       // 加个特殊字符方便划分
-      pdfText = pdfText.replace(/\d+问/g, '&&问'); // 匹配数字加换行并替换为空字符串
+      pdfText = pdfText.replace(/\d+\s*问/g, '&&问'); // 匹配数字加一个或多个空格加问字并替换为‘&&问’字符
       // const newText = pdfText.slice(0, 10000)
 
       // 将各个回答生成数组
@@ -233,7 +233,7 @@ getPdfFileText(pdfFilePath);
 // 测试读文件
 function testReadText() {
   // 读取文件的路径
-  const filePath = './finalData.txt';
+  const filePath = './finalData1.txt';
 
   // 使用 fs.readFile 方法异步读取文件内容
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -243,7 +243,9 @@ function testReadText() {
     }
 
     // 输出文件内容
-    console.log('文件内容:', JSON.parse(data));
+    const arr = JSON.parse(data)
+    const len = arr.length
+    console.log('文件内容:', len);
   });
 }
 
