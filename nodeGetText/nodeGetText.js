@@ -202,11 +202,20 @@ function makeTagId(dataList, subTagArr) {
 // contentArr:各条问答内容组成的数组
 function generateObjDataByContent(contentArr, dataTagObj) {
   const objData = contentArr.map((val, index) => {
-    return {
-      id: index + 501,
-      content: val,
-      mainTagId: dataTagObj[index].mainTagId,
-      subTagIds: dataTagObj[index].subTagIds,
+    if (dataTagObj[index]) {
+      return {
+        id: index + 501,
+        content: val,
+        mainTagId: dataTagObj[index].mainTagId,
+        subTagIds: dataTagObj[index].subTagIds,
+      }
+    } else {
+      return {
+        id: index + 501,
+        content: val,
+        mainTagId: 0,
+        subTagIds: [],
+      }
     }
   })
   // console.log(objData)
@@ -228,7 +237,7 @@ function writeFinalData(finalData) {
 }
 
 
-getPdfFileText(pdfFilePath);
+// getPdfFileText(pdfFilePath);
 
 // 测试读文件
 function testReadText() {
@@ -249,4 +258,4 @@ function testReadText() {
   });
 }
 
-// testReadText()
+testReadText()
